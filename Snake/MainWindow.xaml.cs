@@ -43,6 +43,7 @@ namespace Snake
             snake.Add(new Point(5, 6));
             currentDirection = Direction.Right;
             GenerateFood();
+            score = 0;
 
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(200);
