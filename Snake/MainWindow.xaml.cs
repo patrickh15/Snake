@@ -18,9 +18,11 @@ namespace Snake
         private const int Rows = 20;
         private const int Cols = 20;
         private const int CellSize = 20;
+        
 
         private enum Direction { Up, Down, Left, Right }
         private Direction currentDirection = Direction.Right;
+        private Direction nextDirection = Direction.Right;
 
         private List<Point> snake = new List<Point>();
         private Point food;
@@ -40,7 +42,7 @@ namespace Snake
             GameCanvas.Height = Rows * CellSize;
             snake.Clear();
             snake.Add(new Point(5, 5));
-            snake.Add(new Point(5, 6));
+            snake.Add(new Point(6, 5));
             currentDirection = Direction.Right;
             GenerateFood();
             score = 0;
@@ -53,6 +55,7 @@ namespace Snake
 
         private void GameLoop()
         {
+            currentDirection = nextDirection;
             MoveSnake();
             CheckCollision();
             Draw();
@@ -134,16 +137,16 @@ namespace Snake
             switch (e.Key)
             {
                 case Key.Up:
-                    if (currentDirection != Direction.Down) currentDirection = Direction.Up;
+                    if (currentDirection != Direction.Down) nextDirection = Direction.Up;
                     break;
                 case Key.Down:
-                    if (currentDirection != Direction.Up) currentDirection = Direction.Down;
+                    if (currentDirection != Direction.Up) nextDirection = Direction.Down;
                     break;
                 case Key.Left:
-                    if (currentDirection != Direction.Right) currentDirection = Direction.Left;
+                    if (currentDirection != Direction.Right) nextDirection = Direction.Left;
                     break;
                 case Key.Right:
-                    if (currentDirection != Direction.Left) currentDirection = Direction.Right;
+                    if (currentDirection != Direction.Left) nextDirection = Direction.Right;
                     break;
             }
         }
